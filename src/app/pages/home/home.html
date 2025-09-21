@@ -1,0 +1,105 @@
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-slider">
+    <div class="slide active">
+      <img src="images/hero/hero-page.jpg" alt="La Rivera - Vista principal" loading="lazy">
+      <div class="slide-content">
+        <h1>Bienvenido a La Rivera</h1>
+        <p>Disfruta de un entorno natural único con todas las comodidades para tu estadía perfecta.</p>
+        <a routerLink="/espacios" class="btn-primary">Ver Espacios</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Espacios Section -->
+<section id="espacios" class="espacios-section">
+  <div class="container">
+    <h2>Nuestros Espacios</h2>
+    <div class="espacios-grid">
+      <div class="espacio-card">
+        <img src="images/espacios/habitaciones/habitaciones-hero.JPEG" alt="Habitaciones" loading="lazy">
+        <div class="card-content">
+          <h3>Habitaciones</h3>
+          <p>Espacios cómodos y acogedores para el descanso.</p>
+          <a routerLink="/espacios/habitaciones" class="btn-secondary">Ver más</a>
+        </div>
+      </div>
+      <div class="espacio-card">
+        <img src="images/espacios/piscina/piscina-hero.jpg" alt="Piscina" loading="lazy">
+        <div class="card-content">
+          <h3>Piscina</h3>
+          <p>Piscina rodeada de palmas, relájate con el sonido del agua.</p>
+          <a routerLink="/espacios/piscina" class="btn-secondary">Ver más</a>
+        </div>
+      </div>
+      <div class="espacio-card">
+        <img src="images/espacios/kiosco/kiosco-hero.jpg" alt="Kiosco" loading="lazy">
+        <div class="card-content">
+          <h3>Kiosco</h3>
+          <p>Espacio cubierto ideal para reuniones y comidas.</p>
+          <a routerLink="/espacios/kiosco" class="btn-secondary">Ver más</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Calculator -->
+<section id="tarifas" class="tarifas-section">
+  <div class="container">
+    <h2>Tarifas y Cotizador</h2>
+    <div class="pricing-info">
+      <p><strong>Tarifa base:</strong> {{pricingService.formatearPrecio(config.tarifaBasePorNoche)}} COP por noche (hasta {{config.aforoBase}} huéspedes)</p>
+      <p><strong>Adicional:</strong> {{pricingService.formatearPrecio(config.adicionalPorPersonaPorNoche)}} COP por persona extra</p>
+      <p><strong>Aforo máximo:</strong> {{config.aforoMaximo}} huéspedes</p>
+      <p><strong>Mínimo:</strong> {{config.minNoches}} noche(s)</p>
+    </div>
+    <div class="quick-calculator">
+      <div class="calc-inputs">
+        <input 
+          type="date" 
+          [(ngModel)]="fechaEntrada" 
+          (ngModelChange)="onCalculatorChange()"
+          placeholder="Fecha entrada">
+        <input 
+          type="date" 
+          [(ngModel)]="fechaSalida" 
+          (ngModelChange)="onCalculatorChange()"
+          placeholder="Fecha salida">
+        <input 
+          type="number" 
+          [(ngModel)]="huespedes" 
+          (ngModelChange)="onCalculatorChange()"
+          [min]="config.aforoBase" 
+          [max]="config.aforoMaximo"
+          placeholder="# Huéspedes">
+      </div>
+      <div class="calc-result">
+        <div *ngIf="calculation && calculation.valido" class="price-display">
+          <p><strong>Noches:</strong> {{calculation.noches}}</p>
+          <p><strong>Huéspedes:</strong> {{calculation.huespedes}}</p>
+          <p *ngIf="calculation.extras > 0"><strong>Personas extra:</strong> {{calculation.extras}}</p>
+          <p><strong>Precio por noche:</strong> {{pricingService.formatearPrecio(calculation.totalPorNoche)}}</p>
+          <p class="total-price"><strong>Total:</strong> <span class="price">{{pricingService.formatearPrecio(calculation.total)}}</span></p>
+          <small>*Precio estimado, puede variar según temporada</small>
+        </div>
+        <div *ngIf="calculation && !calculation.valido" class="price-errors">
+          <ul>
+            <li *ngFor="let error of calculation.errores" class="error">{{error}}</li>
+          </ul>
+        </div>
+        <div *ngIf="!calculation" class="price-placeholder">
+          <p>Ingresa las fechas y número de huéspedes para ver el precio estimado</p>
+        </div>
+        <button 
+          type="button" 
+          class="btn-primary" 
+          (click)="goToReservation()"
+          [disabled]="!calculation || !calculation.valido">
+          Reservar ahora
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

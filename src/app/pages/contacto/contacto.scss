@@ -1,0 +1,300 @@
+.contacto-page {
+  padding-top: 100px; // Account for fixed navbar
+  min-height: 100vh;
+  background: #fafafa;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .content-section {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #2c3e50;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .info-card, .map-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  .card-header {
+    background: linear-gradient(135deg, #48c78e 0%, #3a9d6b 100%);
+    color: white;
+    padding: 1.5rem 2rem;
+    
+    h2 {
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+  }
+
+  .card-content {
+    padding: 2rem;
+  }
+
+  .contact-item, .payment-method {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .contact-icon, .payment-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(72, 199, 142, 0.1);
+    border-radius: 50%;
+    flex-shrink: 0;
+    
+    .logo-icon {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+    
+    // Ajustes específicos para cada logo
+    img[src*="logo-whatsapp"] {
+      width: 26px;
+      height: 26px;
+    }
+    
+    img[src*="log-nequi"] {
+      width: 28px;
+      height: 28px;
+    }
+    
+    img[src*="logo-bancolombia"] {
+      width: 30px;
+      height: 20px;
+    }
+    
+    img[src*="logo-bre-b"] {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  .contact-details, .payment-details {
+    flex: 1;
+
+    h3, h4 {
+      margin: 0 0 0.5rem 0;
+      color: #2c3e50;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 0;
+      color: #666;
+      line-height: 1.5;
+    }
+  }
+
+  .contact-link {
+    color: #48c78e;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+
+    &:hover {
+      color: #3a9d6b;
+      transform: translateX(2px);
+    }
+
+    &.whatsapp-link {
+      background: #25D366;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+
+      &:hover {
+        background: #128C7E;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      }
+    }
+  }
+
+  .payment-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: rgba(72, 199, 142, 0.05);
+    padding: 1rem;
+    border-radius: 12px;
+    margin-top: 1rem;
+
+    .note-icon {
+      font-size: 1.2rem;
+      color: #48c78e;
+    }
+
+    p {
+      margin: 0;
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+  }
+
+  .map-card {
+    grid-column: 1 / -1; // Full width
+    margin-top: 1rem;
+  }
+
+  .map-container {
+    position: relative;
+    overflow: hidden;
+
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      transition: all 0.3s ease;
+    }
+  }
+
+  .coordinates {
+    padding: 1rem 2rem;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    text-align: center;
+
+    p {
+      margin: 0;
+      color: #666;
+      font-size: 0.95rem;
+      font-family: 'Courier New', monospace;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .contacto-page {
+    padding-top: 80px;
+
+    .container {
+      padding: 0 15px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .card-header {
+      padding: 1.2rem 1.5rem;
+
+      h2 {
+        font-size: 1.2rem;
+      }
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .contact-item, .payment-method {
+      padding: 0.8rem 0;
+    }
+
+    .contact-icon, .payment-icon {
+      width: 35px;
+      height: 35px;
+      font-size: 1.3rem;
+      
+      .logo-icon {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .contact-details, .payment-details {
+      h3, h4 {
+        font-size: 1rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+    }
+
+    .map-container iframe {
+      height: 300px;
+    }
+
+    .coordinates {
+      padding: 0.8rem 1.5rem;
+
+      p {
+        font-size: 0.85rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .contacto-page {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .info-card {
+      min-width: unset;
+    }
+
+    .contact-item, .payment-method {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .contact-icon, .payment-icon {
+      align-self: flex-start;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+<div class="espacio-detalle" *ngIf="espacio">
+  <div class="container">
+    <div class="content-section">
+      <h1>{{ espacio.nombre }}</h1>
+      
+      <div class="hero-image-container">
+        <img [src]="espacio.imagen" [alt]="espacio.nombre" class="hero-image">
+      </div>
+      
+      <div class="description">
+        <h2>Descripción</h2>
+        <p>{{ espacio.descripcionLarga }}</p>
+      </div>
+      
+      <div class="amenidades">
+        <h3>Amenidades</h3>
+        <ul>
+          <li *ngFor="let amenidad of espacio.amenidades">{{ amenidad }}</li>
+        </ul>
+      </div>
+      
+      <div class="reglas">
+        <h3>Reglas del Espacio</h3>
+        <ul>
+          <li *ngFor="let regla of espacio.reglas">{{ regla }}</li>
+        </ul>
+      </div>
+      
+      <div class="cta-section">
+        <a routerLink="/reservar" [queryParams]="{espacio: espacio.slug}" class="btn-primary">
+          Reservar
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!espacio" class="not-found">
+  <div class="container">
+    <h1>Espacio no encontrado</h1>
+    <p>El espacio que buscas no existe.</p>
+    <a routerLink="/espacios" class="btn-primary">Ver todos los espacios</a>
+  </div>
+</div>

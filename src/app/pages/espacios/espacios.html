@@ -1,0 +1,15 @@
+<div class="espacios-page">
+  <div class="container">
+    <h1>Nuestros Espacios</h1>
+    <div class="espacios-grid">
+      <div class="espacio-card" *ngFor="let espacio of espacios">
+        <img [src]="espacio.imagen" [alt]="espacio.nombre" loading="lazy">
+        <div class="card-content">
+          <h3>{{ espacio.nombre }}</h3>
+          <p>{{ espacio.descripcionCorta }}</p>
+          <a [routerLink]="['/espacios', espacio.slug]" class="btn-primary">Ver detalles</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

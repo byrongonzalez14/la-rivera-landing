@@ -1,0 +1,199 @@
+.espacio-detalle {
+  padding-top: 100px; // Account for fixed navbar
+  min-height: 100vh;
+  background: #fafafa;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .content-section {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    margin-bottom: 2rem;
+    color: #2c3e50;
+    font-size: 2.5rem;
+    text-align: left;
+  }
+
+  .hero-image-container {
+    margin-bottom: 2rem;
+    
+    .hero-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .description {
+    margin-bottom: 2rem;
+    
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    
+    p {
+      color: #666;
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
+  }
+
+  .amenidades, .reglas {
+    margin-bottom: 2rem;
+    
+    h3 {
+      color: #2c3e50;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    
+    ul {
+      list-style: none;
+      padding: 0;
+      
+      li {
+        background: white;
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        color: #555;
+        position: relative;
+        padding-left: 40px;
+        
+        &::before {
+          content: '✓';
+          position: absolute;
+          left: 16px;
+          color: #48c78e;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .cta-section {
+    margin-top: 3rem;
+    text-align: center;
+    
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, #48c78e 0%, #3a9d6b 100%);
+      color: white;
+      text-decoration: none;
+      padding: 15px 40px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(72, 199, 142, 0.3);
+      
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(72, 199, 142, 0.4);
+        background: linear-gradient(135deg, #3a9d6b 0%, #48c78e 100%);
+      }
+    }
+  }
+}
+
+.not-found {
+  padding-top: 100px;
+  min-height: 100vh;
+  background: #fafafa;
+  text-align: center;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    padding-top: 4rem;
+  }
+  
+  h1 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+  
+  .btn-primary {
+    display: inline-block;
+    background: linear-gradient(135deg, #48c78e 0%, #3a9d6b 100%);
+    color: white;
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(72, 199, 142, 0.3);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .espacio-detalle {
+    padding-top: 80px;
+    
+    .container {
+      padding: 0 15px;
+    }
+    
+    h1 {
+      font-size: 2rem;
+    }
+    
+    .hero-image-container {
+      .hero-image {
+        height: 250px;
+      }
+    }
+    
+    .description {
+      h2 {
+        font-size: 1.5rem;
+      }
+      
+      p {
+        font-size: 1rem;
+      }
+    }
+    
+    .amenidades, .reglas {
+      h3 {
+        font-size: 1.3rem;
+      }
+    }
+    
+    .cta-section {
+      margin-top: 2rem;
+      
+      .btn-primary {
+        padding: 12px 30px;
+        font-size: 1rem;
+      }
+    }
+  }
+  
+  .not-found {
+    padding-top: 80px;
+  }
+}
