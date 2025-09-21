@@ -6,7 +6,7 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist/la-rivera-landing"
+        "distDir": "dist/la-rivera-landing/browser"
       }
     }
   ],
@@ -17,6 +17,6 @@
     }
   ],
   "buildCommand": "ng build --configuration production",
-  "outputDirectory": "dist/la-rivera-landing",
+  "outputDirectory": "dist/la-rivera-landing/browser",
   "framework": "angular"
 }
