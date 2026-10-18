@@ -13,12 +13,6 @@ interface Momento {
   text: string;
 }
 
-interface Resena {
-  q: string;
-  who: string;
-  what: string;
-}
-
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -64,24 +58,6 @@ export class HomeComponent implements OnInit {
       time: 'NOCHE',
       title: 'Fogata y estrellas',
       text: 'Asado, buena conversación y un cielo que en la ciudad no se ve.'
-    }
-  ];
-
-  readonly resenas: Resena[] = [
-    {
-      q: 'Llegamos cansados y nos fuimos nuevos. Los niños no quisieron salir de la piscina en todo el fin de semana.',
-      who: 'Familia Restrepo',
-      what: 'Fin de semana familiar'
-    },
-    {
-      q: 'Celebramos los 60 de mi mamá aquí. La casa es preciosa y la atención, impecable.',
-      who: 'Carolina M.',
-      what: 'Celebración'
-    },
-    {
-      q: 'Hicimos nuestro retiro de equipo. Espacio, silencio y naturaleza: justo lo que necesitábamos.',
-      who: 'Equipo Nativa',
-      what: 'Retiro de empresa'
     }
   ];
 

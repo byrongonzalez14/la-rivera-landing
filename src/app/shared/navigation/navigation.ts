@@ -43,16 +43,17 @@ export class NavigationComponent implements OnInit, OnDestroy {
     return !this.onHome() || this.scrolled();
   }
 
+  /** Margen antes de asentar el header: evita parpadeos por el rebote del scroll. */
+  private static readonly UMBRAL = 16;
+
   @HostListener('window:scroll')
-  @HostListener('window:resize')
   onScroll() {
     if (!this.onHome()) {
       this.scrolled.set(true);
       return;
     }
-    // El hero mide max(640px, 94vh); el header se asienta justo antes de salir de él.
-    const heroHeight = Math.max(640, window.innerHeight * 0.94);
-    this.scrolled.set(window.scrollY > heroHeight - 88);
+    // En el home se asienta apenas arranca el scroll, no al salir del hero.
+    this.scrolled.set(window.scrollY > NavigationComponent.UMBRAL);
   }
 
   toggleMenu() {

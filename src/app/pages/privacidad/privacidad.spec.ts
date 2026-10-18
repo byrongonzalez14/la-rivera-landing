@@ -1,23 +1,29 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Privacidad } from './privacidad';
+import { PrivacidadComponent } from './privacidad';
+import { APP_CONFIG } from '../../config/app.config';
 
-describe('Privacidad', () => {
-  let component: Privacidad;
-  let fixture: ComponentFixture<Privacidad>;
+describe('PrivacidadComponent', () => {
+  let component: PrivacidadComponent;
+  let fixture: ComponentFixture<PrivacidadComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Privacidad]
-    })
-    .compileComponents();
+      imports: [PrivacidadComponent]
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(Privacidad);
+    fixture = TestBed.createComponent(PrivacidadComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('se crea', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('publica los datos de contacto de la config', () => {
+    const texto = (fixture.nativeElement as HTMLElement).textContent ?? '';
+    expect(texto).toContain(APP_CONFIG.contacto.email);
+    expect(texto).toContain(APP_CONFIG.contacto.telefono);
   });
 });
