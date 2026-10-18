@@ -1,104 +1,276 @@
-<!-- Hero Section -->
-<section class="hero">
-  <div class="hero-slider">
-    <div class="slide active">
-      <img src="images/hero/hero-page.jpg" alt="La Rivera - Vista principal" loading="eager" fetchpriority="high">
-      <div class="slide-content">
-        <h1>Bienvenido a La Rivera</h1>
-        <p>Disfruta de un entorno natural único con todas las comodidades para tu estadía perfecta.</p>
-        <a routerLink="/espacios" class="btn-primary">Ver Espacios</a>
+<!-- ====================== Hero ====================== -->
+<section id="inicio" class="hero">
+  <img
+    class="hero-img"
+    src="/images/hero/hero-page.jpg"
+    alt="La casa de La Rivera entre los árboles"
+    fetchpriority="high">
+  <div class="hero-wash hero-wash--side" aria-hidden="true"></div>
+  <div class="hero-wash hero-wash--base" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="hero-copy">
+      <span class="hero-kicker">TU CASA EN EL CAMPO</span>
+      <h1 class="display h-xl">Donde el tiempo corre <em>como el río.</em></h1>
+      <p class="hero-lede">
+        Una casa campestre rodeada de verde, agua y silencio. Ven con tu familia o tus amigos y
+        quédate el tiempo que necesites.
+      </p>
+    </div>
+    <div class="hero-actions">
+      <a class="pill pill--light" routerLink="/" fragment="reservar">Consultar fechas</a>
+      <a class="pill pill--outline" routerLink="/" fragment="casa">Conocer la casa</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== La casa ====================== -->
+<section id="casa" class="section casa">
+  <div class="shell casa-grid">
+    <div class="casa-copy">
+      <div class="eyebrow">La casa</div>
+      <p class="display casa-lead">
+        Aquí las mañanas empiezan con pájaros y café, las tardes se alargan junto al agua y las
+        noches vuelven a tener estrellas.
+      </p>
+      <p class="lede casa-text">
+        La Rivera es toda tuya: una casa completa, sin vecinos y sin prisa, con lo necesario para
+        quedarse unos días. Llegas, cierras la puerta y el campo hace el resto.
+      </p>
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-n">{{ config.aforoMaximo }}</span>
+          <span class="stat-l">huéspedes</span>
+        </div>
+        <div class="stat">
+          <span class="stat-n">{{ espacios.length }}</span>
+          <span class="stat-l">espacios</span>
+        </div>
+        <div class="stat">
+          <span class="stat-n">100%</span>
+          <span class="stat-l">privada</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="casa-mosaic">
+      <div class="frame casa-a">
+        <img src="/images/espacios/terraza/terraza-hero.JPG" alt="La terraza de la casa" loading="lazy">
+      </div>
+      <div class="casa-col">
+        <div class="frame casa-b">
+          <img src="/images/espacios/piscina/piscina-hero.jpg" alt="La piscina" loading="lazy">
+        </div>
+        <div class="frame casa-c">
+          <img src="/images/espacios/habitaciones/habitaciones-hero.JPEG" alt="Una habitación" loading="lazy">
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Espacios Section -->
-<section id="espacios" class="espacios-section">
-  <div class="container">
-    <h2>Nuestros Espacios</h2>
+<!-- ====================== Espacios ====================== -->
+<section id="espacios" class="section section--flush-top espacios-sec">
+  <div class="shell espacios-wrap">
+    <div class="section-head rule-top">
+      <h2 class="display h-lg">Espacios para <em>estar</em></h2>
+      <p>Interiores amplios y frescos, y afuera, todo el terreno para recorrer.</p>
+    </div>
+
     <div class="espacios-grid">
-      <div class="espacio-card">
-        <img src="images/espacios/habitaciones/habitaciones-hero.JPEG" alt="Habitaciones" loading="lazy">
-        <div class="card-content">
-          <h3>Habitaciones</h3>
-          <p>Espacios cómodos y acogedores para el descanso.</p>
-          <a routerLink="/espacios/habitaciones" class="btn-secondary">Ver más</a>
+      <a
+        class="espacio"
+        *ngFor="let e of espacios; let i = index"
+        [routerLink]="['/espacios', e.slug]">
+        <div class="frame frame--hover espacio-img" [class.frame--empty]="!e.imagen">
+          <img *ngIf="e.imagen" [src]="e.imagen" [alt]="e.nombre" loading="lazy">
+          <span *ngIf="!e.imagen">Foto del {{ e.nombre }}</span>
         </div>
-      </div>
-      <div class="espacio-card">
-        <img src="images/espacios/piscina/piscina-hero.jpg" alt="Piscina" loading="lazy">
-        <div class="card-content">
-          <h3>Piscina</h3>
-          <p>Piscina rodeada de palmas, relájate con el sonido del agua.</p>
-          <a routerLink="/espacios/piscina" class="btn-secondary">Ver más</a>
+        <div class="espacio-text">
+          <div class="espacio-title">
+            <span class="espacio-n">{{ i + 1 | number: '2.0-0' }}</span>
+            <h3>{{ e.nombre }}</h3>
+          </div>
+          <p>{{ e.descripcionCorta }}</p>
         </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== Experiencias ====================== -->
+<section id="experiencias" class="section section--dark">
+  <div class="shell dia-grid">
+    <div class="dia-intro">
+      <div class="eyebrow">Un día en La Rivera</div>
+      <h2 class="display h-lg">Sin agenda.<br><em>Solo el ritmo del campo.</em></h2>
+      <div class="frame dia-img">
+        <img src="/images/espacios/kiosco/kiosco-hero.jpg" alt="El kiosco al atardecer" loading="lazy">
       </div>
-      <div class="espacio-card">
-        <img src="images/espacios/kiosco/kiosco-hero.jpg" alt="Kiosco" loading="lazy">
-        <div class="card-content">
-          <h3>Kiosco</h3>
-          <p>Espacio cubierto ideal para reuniones y comidas.</p>
-          <a routerLink="/espacios/kiosco" class="btn-secondary">Ver más</a>
+    </div>
+
+    <div class="dia-lista">
+      <div class="momento" *ngFor="let m of momentos">
+        <span class="momento-h">{{ m.time }}</span>
+        <div class="momento-copy">
+          <h3>{{ m.title }}</h3>
+          <p>{{ m.text }}</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Quick Calculator -->
-<section id="tarifas" class="tarifas-section">
-  <div class="container">
-    <h2>Tarifas y Cotizador</h2>
-    <div class="pricing-info">
-      <p><strong>Tarifa base:</strong> {{pricingService.formatearPrecio(config.tarifaBasePorNoche)}} COP por noche (hasta {{config.aforoBase}} huéspedes)</p>
-      <p><strong>Adicional:</strong> {{pricingService.formatearPrecio(config.adicionalPorPersonaPorNoche)}} COP por persona extra</p>
-      <p><strong>Aforo máximo:</strong> {{config.aforoMaximo}} huéspedes</p>
-      <p><strong>Mínimo:</strong> {{config.minNoches}} noche(s)</p>
+<!-- ====================== Galería ====================== -->
+<section id="galeria" class="section">
+  <div class="shell galeria-wrap">
+    <div class="section-head">
+      <h2 class="display h-lg">Galería</h2>
+      <p>Un vistazo a la casa, el jardín y los rincones que más disfrutan nuestros huéspedes.</p>
     </div>
-    <div class="quick-calculator">
-      <div class="calc-inputs">
-        <input 
-          type="date" 
-          [(ngModel)]="fechaEntrada" 
-          (ngModelChange)="onCalculatorChange()"
-          placeholder="Fecha entrada">
-        <input 
-          type="date" 
-          [(ngModel)]="fechaSalida" 
-          (ngModelChange)="onCalculatorChange()"
-          placeholder="Fecha salida">
-        <input 
-          type="number" 
-          [(ngModel)]="huespedes" 
-          (ngModelChange)="onCalculatorChange()"
-          [min]="config.aforoBase" 
-          [max]="config.aforoMaximo"
-          placeholder="# Huéspedes">
+    <div class="galeria-grid">
+      <div class="frame" *ngFor="let g of galeria" [ngClass]="g.span">
+        <img [src]="g.src" [alt]="g.alt" loading="lazy">
       </div>
-      <div class="calc-result">
-        <div *ngIf="calculation && calculation.valido" class="price-display">
-          <p><strong>Noches:</strong> {{calculation.noches}}</p>
-          <p><strong>Huéspedes:</strong> {{calculation.huespedes}}</p>
-          <p *ngIf="calculation.extras > 0"><strong>Personas extra:</strong> {{calculation.extras}}</p>
-          <p><strong>Precio por noche:</strong> {{pricingService.formatearPrecio(calculation.totalPorNoche)}}</p>
-          <p class="total-price"><strong>Total:</strong> <span class="price">{{pricingService.formatearPrecio(calculation.total)}}</span></p>
-          <small>*Precio estimado, puede variar según temporada</small>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== Testimonios ====================== -->
+<section class="section section--flush-top">
+  <div class="shell resenas-wrap rule-top">
+    <div class="eyebrow">Quienes ya vinieron</div>
+    <div class="resenas-grid">
+      <figure class="resena" *ngFor="let r of resenas">
+        <blockquote>&ldquo;{{ r.q }}&rdquo;</blockquote>
+        <figcaption>
+          <span class="resena-quien">{{ r.who }}</span>
+          <span class="resena-que">{{ r.what }}</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== Reservar ====================== -->
+<section id="reservar" class="section section--deep">
+  <div class="shell reservar-grid">
+    <div class="reservar-copy">
+      <div class="eyebrow">Reservar</div>
+      <h2 class="display h-lg">Elige tus fechas.<br><em>Nosotros preparamos la casa.</em></h2>
+      <p class="lede reservar-lede">
+        Mira el valor de tu estadía al instante y envíanos la solicitud por WhatsApp. Te confirmamos
+        disponibilidad en pocas horas.
+      </p>
+      <div class="notas">
+        <div class="nota">
+          Tarifa por noche para grupos de hasta {{ config.aforoBase }} personas
         </div>
-        <div *ngIf="calculation && !calculation.valido" class="price-errors">
-          <ul>
-            <li *ngFor="let error of calculation.errores" class="error">{{error}}</li>
-          </ul>
+        <div class="nota">
+          Desde la persona {{ config.aforoBase + 1 }}:
+          {{ pricing.formatearPrecio(config.adicionalPorPersonaPorNoche) }} adicional por noche
         </div>
-        <div *ngIf="!calculation" class="price-placeholder">
-          <p>Ingresa las fechas y número de huéspedes para ver el precio estimado</p>
+        <div class="nota">Check-in 3:00 p.m. &middot; Check-out 1:00 p.m.</div>
+      </div>
+    </div>
+
+    <div class="cotizador">
+      <div class="dos-col">
+        <label class="field">
+          Llegada
+          <input
+            type="date"
+            class="control"
+            [(ngModel)]="checkIn"
+            (ngModelChange)="onCheckInChange()"
+            [min]="hoy">
+        </label>
+        <label class="field">
+          Salida
+          <input type="date" class="control" [(ngModel)]="checkOut" [min]="minSalida">
+        </label>
+      </div>
+
+      <div class="stepper">
+        <div class="stepper-label">
+          <span class="field">Huéspedes</span>
+          <span class="stepper-n">{{ huespedes }} personas</span>
         </div>
-        <button 
-          type="button" 
-          class="btn-primary" 
-          (click)="goToReservation()"
-          [disabled]="!calculation || !calculation.valido">
-          Reservar ahora
+        <div class="stepper-btns">
+          <button type="button" aria-label="Menos huéspedes" (click)="menosHuespedes()">&minus;</button>
+          <button type="button" aria-label="Más huéspedes" (click)="masHuespedes()">+</button>
+        </div>
+      </div>
+
+      <div class="dos-col">
+        <label class="field">
+          Nombre
+          <input type="text" class="control" [(ngModel)]="nombre" placeholder="Tu nombre">
+        </label>
+        <label class="field">
+          Motivo
+          <input type="text" class="control" [(ngModel)]="motivo" placeholder="Descanso, cumpleaños…">
+        </label>
+      </div>
+
+      <div class="desglose">
+        <div class="linea">
+          <span>{{ pricing.formatearPrecio(config.tarifaBasePorNoche) }} &times; {{ etiquetaNoches }}</span>
+          <span>{{ pricing.formatearPrecio(totalBase) }}</span>
+        </div>
+        <div class="linea" *ngIf="hayAdicionales">
+          <span>{{ etiquetaAdicionales }} &times; {{ etiquetaNoches }}</span>
+          <span>{{ pricing.formatearPrecio(totalAdicionales) }}</span>
+        </div>
+        <div class="linea linea--total">
+          <span class="total-l">TOTAL</span>
+          <span class="total-n">{{ pricing.formatearPrecio(total) }}</span>
+        </div>
+      </div>
+
+      <a class="pill pill--solid cotizador-cta" [href]="waLink" target="_blank" rel="noopener">
+        Enviar solicitud por WhatsApp
+      </a>
+      <span class="cotizador-nota">
+        Pagos por Nequi, Bre-B o Bancolombia. Confirmamos todo contigo por chat.
+      </span>
+      <a class="cotizador-form" routerLink="/reservar">¿Prefieres el formulario completo? &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== Ubicación ====================== -->
+<section id="ubicacion" class="section">
+  <div class="shell ubicacion-grid">
+    <div class="ubicacion-copy">
+      <div class="eyebrow">Cómo llegar</div>
+      <h2 class="display h-lg ubicacion-title">Cerca de la ciudad.<br><em>Lejos del ruido.</em></h2>
+      <p class="lede ubicacion-text">{{ config.ubicacion.descripcion }}</p>
+      <a class="link-underline" [href]="config.ubicacion.mapsUrl" target="_blank" rel="noopener">
+        Abrir en Google Maps &rarr;
+      </a>
+    </div>
+    <div class="frame mapa">
+      <iframe
+        title="Ubicación de La Rivera"
+        src="https://maps.google.com/maps?q=3.6347883134985266,-76.39371290384582&amp;z=15&amp;output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== Preguntas frecuentes ====================== -->
+<section class="section section--flush-top">
+  <div class="faq-wrap">
+    <h2 class="display h-md">Preguntas frecuentes</h2>
+    <div class="faq-lista">
+      <div class="faq" *ngFor="let f of faqs; let i = index">
+        <button type="button" (click)="alternarFaq(i)" [attr.aria-expanded]="abierta === i">
+          <span>{{ f.q }}</span>
+          <span class="faq-signo" aria-hidden="true">{{ abierta === i ? '−' : '+' }}</span>
         </button>
+        <p *ngIf="abierta === i">{{ f.a }}</p>
       </div>
     </div>
   </div>

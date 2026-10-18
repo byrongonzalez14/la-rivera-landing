@@ -1,27 +1,40 @@
-<nav class="navbar">
-  <div class="nav-container">
-    <div class="nav-logo">
-      <a routerLink="/" class="logo-link">
-        <img src="images/icons/la-rivera-logo.svg" alt="La Rivera Logo" class="logo">
-      </a>
-    </div>
-    
-    <div class="nav-menu" [class.active]="isMenuOpen">
-      <div class="nav-links-group">
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" (click)="closeMenu()">Inicio</a>
-        <a routerLink="/espacios" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Espacios</a>
-        <a routerLink="/contacto" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Contacto</a>
-        <a href="#sitios-interes" class="nav-link" (click)="closeMenu()">Sitios de Interés</a>
-      </div>
-      <div class="nav-cta">
-        <a routerLink="/reservar" routerLinkActive="active" class="nav-link cta-button" (click)="closeMenu()">Reservar</a>
-      </div>
-    </div>
-    
-    <div class="hamburger" [class.active]="isMenuOpen" (click)="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-</nav>
+<header class="site-header" [class.is-solid]="solid" [class.is-open]="menuOpen()">
+  <a class="brand" routerLink="/" fragment="inicio" (click)="closeMenu()" aria-label="La Rivera, inicio">
+    <span class="brand-mark">
+      <img src="images/icons/la-rivera-mark-light.svg" alt="" class="mark mark--light" aria-hidden="true">
+      <img src="images/icons/la-rivera-mark.svg" alt="" class="mark mark--dark" aria-hidden="true">
+    </span>
+    <span class="brand-word">La Rivera</span>
+  </a>
+
+  <nav class="nav-desktop" aria-label="Principal">
+    <a routerLink="/" fragment="casa">La casa</a>
+    <a routerLink="/espacios" routerLinkActive="is-active">Espacios</a>
+    <a routerLink="/" fragment="experiencias">Experiencias</a>
+    <a routerLink="/" fragment="ubicacion">Ubicación</a>
+    <a class="nav-cta" routerLink="/reservar" routerLinkActive="is-active">Reservar</a>
+  </nav>
+
+  <button
+    type="button"
+    class="burger"
+    [attr.aria-expanded]="menuOpen()"
+    aria-controls="menu-movil"
+    [attr.aria-label]="menuOpen() ? 'Cerrar menú' : 'Abrir menú'"
+    (click)="toggleMenu()">
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div id="menu-movil" class="drawer" [class.is-open]="menuOpen()" [attr.inert]="menuOpen() ? null : ''">
+  <nav aria-label="Menú móvil">
+    <a routerLink="/" fragment="casa" (click)="closeMenu()">La casa</a>
+    <a routerLink="/espacios" (click)="closeMenu()">Espacios</a>
+    <a routerLink="/" fragment="experiencias" (click)="closeMenu()">Experiencias</a>
+    <a routerLink="/" fragment="galeria" (click)="closeMenu()">Galería</a>
+    <a routerLink="/" fragment="ubicacion" (click)="closeMenu()">Ubicación</a>
+    <a routerLink="/contacto" (click)="closeMenu()">Contacto</a>
+  </nav>
+  <a class="pill pill--solid drawer-cta" routerLink="/reservar" (click)="closeMenu()">Reservar</a>
+</div>

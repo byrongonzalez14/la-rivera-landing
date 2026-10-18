@@ -1,15 +1,33 @@
-<div class="espacios-page">
-  <div class="container">
-    <h1>Nuestros Espacios</h1>
-    <div class="espacios-grid">
-      <div class="espacio-card" *ngFor="let espacio of espacios">
-        <img [src]="espacio.imagen" [alt]="espacio.nombre" loading="lazy">
-        <div class="card-content">
-          <h3>{{ espacio.nombre }}</h3>
-          <p>{{ espacio.descripcionCorta }}</p>
-          <a [routerLink]="['/espacios', espacio.slug]" class="btn-primary">Ver detalles</a>
+<section class="page-head">
+  <div class="shell page-head-inner">
+    <div class="eyebrow">Espacios</div>
+    <h1 class="display h-lg">Espacios para <em>estar</em></h1>
+    <p class="lede">
+      Interiores amplios y frescos, y afuera, todo el terreno para recorrer. Entra a cada uno para
+      ver qué incluye y cómo se usa.
+    </p>
+  </div>
+</section>
+
+<section class="section section--flush-top">
+  <div class="shell">
+    <div class="espacios-grid rule-top">
+      <a
+        class="espacio"
+        *ngFor="let e of espacios; let i = index"
+        [routerLink]="['/espacios', e.slug]">
+        <div class="frame frame--hover espacio-img" [class.frame--empty]="!e.imagen">
+          <img *ngIf="e.imagen" [src]="e.imagen" [alt]="e.nombre" loading="lazy">
+          <span *ngIf="!e.imagen">Foto del {{ e.nombre }}</span>
         </div>
-      </div>
+        <div class="espacio-text">
+          <div class="espacio-title">
+            <span class="espacio-n">{{ i + 1 | number: '2.0-0' }}</span>
+            <h3>{{ e.nombre }}</h3>
+          </div>
+          <p>{{ e.descripcionCorta }}</p>
+        </div>
+      </a>
     </div>
   </div>
-</div>
+</section>

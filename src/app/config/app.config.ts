@@ -15,6 +15,11 @@ export interface AppConfig {
     llaveBreB: string;
     bancolombia: string;
   };
+  ubicacion: {
+    descripcion: string;
+    mapsUrl: string;
+    mapsEmbedUrl: string;
+  };
 }
 
 export const APP_CONFIG: AppConfig = {
@@ -33,43 +38,23 @@ export const APP_CONFIG: AppConfig = {
     nequi: '3206935023',
     llaveBreB: '3206935023',
     bancolombia: 'Ahorros 514-491650-64'
+  },
+  ubicacion: {
+    descripcion:
+      'Rozo, Valle del Cauca. A pocos minutos de Palmira y Cali, en medio del campo vallecaucano. Te enviamos la ubicación exacta y las indicaciones al confirmar tu reserva.',
+    mapsUrl: 'https://www.google.com/maps?q=3.6347883134985266,-76.39371290384582',
+    mapsEmbedUrl:
+      'https://maps.google.com/maps?q=3.6347883134985266,-76.39371290384582&z=15&output=embed'
   }
 };
 
 export const ESPACIOS = [
   {
-    slug: 'gimnasio',
-    nombre: 'Gimnasio',
-    descripcionCorta: 'Equipado para cardio y fuerza, entrena sin salir de casa.',
-    descripcionLarga: 'Nuestro gimnasio completamente equipado te permite mantener tu rutina de ejercicios durante tu estadía. Cuenta con máquinas de cardio, pesas libres y equipos de fuerza para todos los niveles de entrenamiento.',
-    imagen: 'images/espacios/gimnasio/gimnasio-hero.jpg',
-    galeria: [
-      '/images/espacios/gimnasio-1.jpg',
-      '/images/espacios/gimnasio-2.jpg',
-      '/images/espacios/gimnasio-3.jpg'
-    ],
-    amenidades: [
-      'Máquinas de cardio (cinta, elíptica, bicicleta)',
-      'Pesas libres y mancuernas',
-      'Equipos de fuerza multifuncionales',
-      'Espejos de pared completa',
-      'Ventilación natural',
-      'Área de estiramiento'
-    ],
-    reglas: [
-      'Uso exclusivo para mayores de 15 años o menores acompañados',
-      'Usar toalla personal y limpiar máquinas tras uso',
-      'Calzado deportivo obligatorio',
-      'No mover equipos pesados sin ayuda',
-      'Reportar inmediatamente cualquier falla o incidente'
-    ]
-  },
-  {
     slug: 'piscina',
     nombre: 'Piscina',
-    descripcionCorta: 'Piscina rodeada de palmas, relájate con el sonido del agua.',
+    descripcionCorta: 'Rodeada de palmas, con zona de descanso y el sonido del agua de fondo.',
     descripcionLarga: 'Nuestra hermosa piscina está rodeada de exuberantes palmas que crean un ambiente tropical único. El área cuenta con zonas de descanso y una vista espectacular para disfrutar de momentos de relajación.',
-    imagen: 'images/espacios/piscina/piscina-hero.jpg',
+    imagen: '/images/espacios/piscina/piscina-hero.jpg',
     galeria: [
       '/images/espacios/piscina-1.jpg',
       '/images/espacios/piscina-2.jpg',
@@ -94,39 +79,11 @@ export const ESPACIOS = [
     ]
   },
   {
-    slug: 'bosque-paz',
-    nombre: 'Bosque Paz',
-    descripcionCorta: 'Zona de contemplación y conexión con la naturaleza.',
-    descripcionLarga: 'El Bosque Paz es nuestro santuario natural, diseñado para la meditación, contemplación y conexión profunda con la naturaleza. Senderos serpenteantes te llevan a través de vegetación nativa donde puedes encontrar tranquilidad y renovar energías.',
-    imagen: '/images/espacios/bosque-hero.jpg',
-    galeria: [
-      '/images/espacios/bosque-1.jpg',
-      '/images/espacios/bosque-2.jpg',
-      '/images/espacios/bosque-3.jpg'
-    ],
-    amenidades: [
-      'Senderos señalizados',
-      'Áreas de meditación',
-      'Bancos de descanso',
-      'Flora y fauna nativa',
-      'Zona de fogata habilitada',
-      'Silencio natural'
-    ],
-    reglas: [
-      'Mantener silencio relativo - zona de contemplación',
-      'No hacer fogatas salvo en zona habilitada',
-      'No dejar residuos de ningún tipo',
-      'Respetar senderos señalizados',
-      'No dañar flora ni fauna',
-      'No ingresar con fuego no autorizado'
-    ]
-  },
-  {
     slug: 'kiosco',
     nombre: 'Kiosco',
-    descripcionCorta: 'Espacio cubierto ideal para reuniones y comidas.',
+    descripcionCorta: 'El corazón social de la casa: comidas largas, reuniones y celebraciones bajo techo.',
     descripcionLarga: 'El kiosco es el corazón social de La Rivera, un espacio cubierto perfecto para reuniones familiares, comidas grupales y celebraciones. Su diseño abierto permite disfrutar del clima mientras se mantiene protegido.',
-    imagen: 'images/espacios/kiosco/kiosco-hero.jpg',
+    imagen: '/images/espacios/kiosco/kiosco-hero.jpg',
     galeria: [
       '/images/espacios/kiosco-1.jpg',
       '/images/espacios/kiosco-2.jpg',
@@ -151,9 +108,9 @@ export const ESPACIOS = [
   {
     slug: 'terraza',
     nombre: 'Terraza',
-    descripcionCorta: 'Vista elevada perfecta para contemplar el paisaje.',
+    descripcionCorta: 'Vista elevada para ver amanecer, atardecer y las luces de la noche.',
     descripcionLarga: 'La terraza ofrece una vista elevada espectacular del paisaje circundante. Es el lugar perfecto para disfrutar de amaneceres, atardeceres, y momentos especiales con una perspectiva única de la propiedad y sus alrededores.',
-    imagen: 'images/espacios/terraza/terraza-hero.JPG',
+    imagen: '/images/espacios/terraza/terraza-hero.JPG',
     galeria: [
       '/images/espacios/terraza-1.jpg',
       '/images/espacios/terraza-2.jpg',
@@ -178,9 +135,9 @@ export const ESPACIOS = [
   {
     slug: 'habitaciones',
     nombre: 'Habitaciones',
-    descripcionCorta: 'Espacios cómodos y acogedores para el descanso.',
+    descripcionCorta: 'Camas cómodas, ventilación natural y la tranquilidad para dormir de verdad.',
     descripcionLarga: 'Nuestras habitaciones están diseñadas para brindar el máximo confort durante tu estadía. Cada una cuenta con amenidades esenciales y un ambiente acogedor que garantiza un descanso reparador.',
-    imagen: 'images/espacios/habitaciones/habitaciones-hero.JPEG',
+    imagen: '/images/espacios/habitaciones/habitaciones-hero.JPEG',
     galeria: [
       '/images/espacios/habitaciones-1.jpg',
       '/images/espacios/habitaciones-2.jpg',
@@ -201,6 +158,61 @@ export const ESPACIOS = [
       'Silencio a partir de 11:00 p.m.',
       'Reportar daños inmediatamente',
       'Pérdidas o daños tienen cobro adicional'
+    ]
+  },
+  {
+    slug: 'gimnasio',
+    nombre: 'Gimnasio',
+    descripcionCorta: 'Cardio, pesas y fuerza para no romper la rutina durante tu estadía.',
+    descripcionLarga: 'Nuestro gimnasio completamente equipado te permite mantener tu rutina de ejercicios durante tu estadía. Cuenta con máquinas de cardio, pesas libres y equipos de fuerza para todos los niveles de entrenamiento.',
+    imagen: '/images/espacios/gimnasio/gimnasio-hero.jpg',
+    galeria: [
+      '/images/espacios/gimnasio-1.jpg',
+      '/images/espacios/gimnasio-2.jpg',
+      '/images/espacios/gimnasio-3.jpg'
+    ],
+    amenidades: [
+      'Máquinas de cardio (cinta, elíptica, bicicleta)',
+      'Pesas libres y mancuernas',
+      'Equipos de fuerza multifuncionales',
+      'Espejos de pared completa',
+      'Ventilación natural',
+      'Área de estiramiento'
+    ],
+    reglas: [
+      'Uso exclusivo para mayores de 15 años o menores acompañados',
+      'Usar toalla personal y limpiar máquinas tras uso',
+      'Calzado deportivo obligatorio',
+      'No mover equipos pesados sin ayuda',
+      'Reportar inmediatamente cualquier falla o incidente'
+    ]
+  },
+  {
+    slug: 'bosque-paz',
+    nombre: 'Bosque Paz',
+    descripcionCorta: 'Senderos, bancas y silencio natural para contemplar y reconectar.',
+    descripcionLarga: 'El Bosque Paz es nuestro santuario natural, diseñado para la meditación, contemplación y conexión profunda con la naturaleza. Senderos serpenteantes te llevan a través de vegetación nativa donde puedes encontrar tranquilidad y renovar energías.',
+    imagen: '',
+    galeria: [
+      '/images/espacios/bosque-1.jpg',
+      '/images/espacios/bosque-2.jpg',
+      '/images/espacios/bosque-3.jpg'
+    ],
+    amenidades: [
+      'Senderos señalizados',
+      'Áreas de meditación',
+      'Bancos de descanso',
+      'Flora y fauna nativa',
+      'Zona de fogata habilitada',
+      'Silencio natural'
+    ],
+    reglas: [
+      'Mantener silencio relativo - zona de contemplación',
+      'No hacer fogatas salvo en zona habilitada',
+      'No dejar residuos de ningún tipo',
+      'Respetar senderos señalizados',
+      'No dañar flora ni fauna',
+      'No ingresar con fuego no autorizado'
     ]
   }
 ];

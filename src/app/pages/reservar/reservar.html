@@ -1,163 +1,211 @@
-<div class="reservar-page">
-  <div class="container">
-    <h1>Solicitud de Reserva</h1>
-    
-    <form [formGroup]="reservaForm" (ngSubmit)="onSubmit()" class="reserva-form">
-      <!-- Datos del huésped -->
-      <section class="form-section">
-        <h2>👤 Datos Personales</h2>
-        <div class="form-group">
-          <label for="nombre">Nombre Completo *</label>
-          <input type="text" id="nombre" formControlName="nombre" 
-                 placeholder="Solo letras, sin números ni símbolos" required>
-          <div class="field-error" *ngIf="reservaForm.get('nombre')?.invalid && reservaForm.get('nombre')?.touched">
-            <small *ngIf="reservaForm.get('nombre')?.errors?.['required']">El nombre es requerido</small>
-            <small *ngIf="reservaForm.get('nombre')?.errors?.['pattern']">Solo se permiten letras y espacios</small>
-            <small *ngIf="reservaForm.get('nombre')?.errors?.['minlength']">Mínimo 2 caracteres</small>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="email">Correo Electrónico *</label>
-          <input type="email" id="email" formControlName="email" 
-                 placeholder="ejemplo@correo.com" required>
-          <div class="field-error" *ngIf="reservaForm.get('email')?.invalid && reservaForm.get('email')?.touched">
-            <small *ngIf="reservaForm.get('email')?.errors?.['required']">El email es requerido</small>
-            <small *ngIf="reservaForm.get('email')?.errors?.['email']">Formato de email inválido</small>
-          </div>
-        </div>
+<section class="page-head">
+  <div class="shell page-head-inner">
+    <div class="eyebrow">Reservar</div>
+    <h1 class="display h-lg">Elige tus fechas.<br><em>Nosotros preparamos la casa.</em></h1>
+    <p class="lede">
+      Completa tus datos y te llevamos a WhatsApp con la solicitud lista. Confirmamos
+      disponibilidad en pocas horas.
+    </p>
+    <p class="espacio-pre" *ngIf="espacioSeleccionado">
+      Vienes desde <strong>{{ espacioSeleccionado }}</strong>. Lo tendremos en cuenta.
+    </p>
+  </div>
+</section>
 
-        <div class="form-group">
-          <label>WhatsApp *</label>
-          <div class="phone-input-group">
-            <select formControlName="codigoPais" class="country-select">
-              <option *ngFor="let country of countries" [value]="country.code">
-                {{country.flag}} {{country.code}} {{country.name}}
+<section class="section section--flush-top">
+  <div class="shell reserva-grid">
+    <form [formGroup]="reservaForm" (ngSubmit)="onSubmit()" class="reserva-form">
+      <!-- ---------------- Datos personales ---------------- -->
+      <fieldset class="bloque">
+        <legend class="eyebrow">Tus datos</legend>
+
+        <label class="field">
+          Nombre completo
+          <input type="text" class="control" formControlName="nombre" placeholder="Tu nombre">
+          <span
+            class="field-error"
+            *ngIf="reservaForm.get('nombre')?.invalid && reservaForm.get('nombre')?.touched">
+            <ng-container *ngIf="reservaForm.get('nombre')?.errors?.['required']">
+              El nombre es requerido.
+            </ng-container>
+            <ng-container *ngIf="reservaForm.get('nombre')?.errors?.['pattern']">
+              Solo se permiten letras y espacios.
+            </ng-container>
+            <ng-container *ngIf="reservaForm.get('nombre')?.errors?.['minlength']">
+              Mínimo 2 caracteres.
+            </ng-container>
+          </span>
+        </label>
+
+        <label class="field">
+          Correo electrónico
+          <input type="email" class="control" formControlName="email" placeholder="ejemplo@correo.com">
+          <span
+            class="field-error"
+            *ngIf="reservaForm.get('email')?.invalid && reservaForm.get('email')?.touched">
+            <ng-container *ngIf="reservaForm.get('email')?.errors?.['required']">
+              El correo es requerido.
+            </ng-container>
+            <ng-container *ngIf="reservaForm.get('email')?.errors?.['email']">
+              Ese correo no parece válido.
+            </ng-container>
+          </span>
+        </label>
+
+        <div class="field">
+          WhatsApp
+          <div class="tel">
+            <select class="control" formControlName="codigoPais" aria-label="Código de país">
+              <option *ngFor="let c of countries" [value]="c.code">
+                {{ c.flag }} {{ c.code }} {{ c.name }}
               </option>
             </select>
-            <input type="tel" formControlName="telefono" 
-                   placeholder="Número sin código de país" 
-                   class="phone-number" required>
+            <input
+              type="tel"
+              class="control"
+              formControlName="telefono"
+              placeholder="Número sin código de país"
+              aria-label="Número de WhatsApp">
           </div>
-          <div class="field-error" *ngIf="reservaForm.get('telefono')?.invalid && reservaForm.get('telefono')?.touched">
-            <small *ngIf="reservaForm.get('telefono')?.errors?.['required']">El número es requerido</small>
-            <small *ngIf="reservaForm.get('telefono')?.errors?.['pattern']">Solo números, entre 7 y 15 dígitos</small>
-          </div>
+          <span
+            class="field-error"
+            *ngIf="reservaForm.get('telefono')?.invalid && reservaForm.get('telefono')?.touched">
+            <ng-container *ngIf="reservaForm.get('telefono')?.errors?.['required']">
+              El número es requerido.
+            </ng-container>
+            <ng-container *ngIf="reservaForm.get('telefono')?.errors?.['pattern']">
+              Solo números, entre 7 y 15 dígitos.
+            </ng-container>
+          </span>
         </div>
 
-        <div class="form-group">
-          <label for="metodoPago">Método de Pago Preferido *</label>
-          <select id="metodoPago" formControlName="metodoPago" required>
-            <option value="nequi">💜 Nequi</option>
-            <option value="bancolombia">🟡 Bancolombia</option>
-            <option value="bre-b">🔴 Llave Bre-b</option>
+        <label class="field">
+          Método de pago preferido
+          <select class="control" formControlName="metodoPago">
+            <option value="nequi">Nequi</option>
+            <option value="bancolombia">Bancolombia</option>
+            <option value="bre-b">Llave Bre-B</option>
           </select>
-        </div>
-      </section>
+        </label>
+      </fieldset>
 
-      <!-- Estadía -->
-      <section class="form-section">
-        <h2>📅 Detalles de la Estadía</h2>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="fechaEntrada">Fecha de Entrada *</label>
-            <input type="date" id="fechaEntrada" formControlName="fechaEntrada" (change)="calcularPrecio()" required>
-          </div>
-          <div class="form-group">
-            <label for="fechaSalida">Fecha de Salida *</label>
-            <input type="date" id="fechaSalida" formControlName="fechaSalida" (change)="calcularPrecio()" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="huespedes">Número de Huéspedes * (1-{{config.aforoMaximo}})</label>
-          <input type="number" id="huespedes" formControlName="huespedes" 
-                 [min]="1" [max]="config.aforoMaximo" (change)="calcularPrecio()" required>
-          
-          <!-- Mensaje aclaratorio para menos de 18 personas -->
-          <div class="guest-warning" *ngIf="showMinimumGuestWarning">
-            <div class="warning-content">
-              <span class="warning-icon">ℹ️</span>
-              <p><strong>Información importante:</strong> Con menos de {{config.aforoBase}} huéspedes se cobra la tarifa base completa (equivalente a {{config.aforoBase}} personas). ¡Puedes reservar sin problema!</p>
-            </div>
-          </div>
-        </div>
+      <!-- ---------------- Estadía ---------------- -->
+      <fieldset class="bloque">
+        <legend class="eyebrow">Tu estadía</legend>
 
-        <div class="form-group">
-          <label for="solicitudesEspeciales">Solicitudes Especiales (Opcional)</label>
-          <textarea id="solicitudesEspeciales" formControlName="solicitudesEspeciales" 
-                    placeholder="Ej: Decoración especial, necesidades alimentarias, etc." 
-                    rows="3"></textarea>
-        </div>
-      </section>
-
-      <!-- Cálculo de precio -->
-      <section class="pricing-section" *ngIf="calculation">
-        <h3>💰 Resumen de Costos</h3>
-        <div class="price-breakdown" *ngIf="calculation.valido">
-          <div class="price-details">
-            <p><strong>Noches:</strong> {{calculation.noches}}</p>
-            <p><strong>Huéspedes:</strong> {{calculation.huespedes}}</p>
-            <p *ngIf="calculation.huespedes < config.aforoBase" class="base-rate-info">
-              <em>Se aplica tarifa base ({{config.aforoBase}} personas)</em>
-            </p>
-            <p *ngIf="calculation.extras > 0"><strong>Personas extra:</strong> {{calculation.extras}}</p>
-            <p><strong>Precio por noche:</strong> {{pricingService.formatearPrecio(calculation.totalPorNoche)}}</p>
-            <p class="total-price"><strong>Total estadía:</strong> {{pricingService.formatearPrecio(calculation.total)}}</p>
-          </div>
-          <div class="payment-breakdown">
-            <div class="payment-amounts">
-              <p class="anticipo"><strong>Anticipo requerido (50%):</strong> {{pricingService.formatearPrecio(calculation.total * 0.5)}}</p>
-              <p class="saldo"><strong>Saldo al check-in:</strong> {{pricingService.formatearPrecio(calculation.total * 0.5)}}</p>
-            </div>
-          </div>
-          <small>*Precio puede variar según temporada y disponibilidad</small>
-        </div>
-        <div class="price-errors" *ngIf="!calculation.valido">
-          <ul>
-            <li *ngFor="let error of calculation.errores" class="error">{{error}}</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- Políticas -->
-      <section class="form-section">
-        <div class="form-group">
-          <label class="checkbox-label">
-            <input type="checkbox" formControlName="aceptaPoliticas" required>
-            Acepto las <a href="/legal/privacidad" target="_blank">políticas de privacidad</a> y reglas del lugar *
+        <div class="dos-col">
+          <label class="field">
+            Llegada
+            <input type="date" class="control" formControlName="fechaEntrada" (change)="calcularPrecio()">
+          </label>
+          <label class="field">
+            Salida
+            <input type="date" class="control" formControlName="fechaSalida" (change)="calcularPrecio()">
           </label>
         </div>
-      </section>
 
-      <!-- Botón de reserva -->
-      <section class="submit-section">
-        <button type="submit" class="btn-reserva" [disabled]="!reservaForm.valid || !calculation?.valido">
-          <span class="btn-icon">🏡</span>
-          <span class="btn-text">RESERVAR</span>
+        <label class="field">
+          Huéspedes (1 &ndash; {{ config.aforoMaximo }})
+          <input
+            type="number"
+            class="control"
+            formControlName="huespedes"
+            [min]="1"
+            [max]="config.aforoMaximo"
+            (change)="calcularPrecio()">
+        </label>
+
+        <p class="aviso" *ngIf="showMinimumGuestWarning">
+          Con menos de {{ config.aforoBase }} huéspedes se cobra la tarifa base completa
+          (equivalente a {{ config.aforoBase }} personas). Puedes reservar sin problema.
+        </p>
+
+        <label class="field">
+          Solicitudes especiales (opcional)
+          <textarea
+            class="control"
+            formControlName="solicitudesEspeciales"
+            rows="3"
+            placeholder="Decoración, necesidades alimentarias, hora de llegada…"></textarea>
+        </label>
+      </fieldset>
+
+      <!-- ---------------- Políticas y envío ---------------- -->
+      <fieldset class="bloque">
+        <legend class="eyebrow">Para terminar</legend>
+        <label class="check">
+          <input type="checkbox" formControlName="aceptaPoliticas">
+          <span>
+            Acepto las
+            <a routerLink="/legal/privacidad" target="_blank">políticas de privacidad</a>
+            y las reglas del lugar.
+          </span>
+        </label>
+
+        <button
+          type="submit"
+          class="pill pill--solid enviar"
+          [disabled]="!reservaForm.valid || !calculation?.valido">
+          Enviar solicitud por WhatsApp
         </button>
-        
-        <div class="process-info">
-          <h4>📋 ¿Cómo funciona?</h4>
-          <div class="steps">
-            <div class="step">
-              <span class="step-number">1</span>
-              <p>Haz clic en <strong>RESERVAR</strong> para enviar tu solicitud por WhatsApp</p>
+      </fieldset>
+    </form>
+
+    <!-- ---------------- Resumen ---------------- -->
+    <aside class="resumen">
+      <div class="resumen-card">
+        <div class="eyebrow">Resumen</div>
+
+        <ng-container *ngIf="calculation && calculation.valido; else sinCalculo">
+          <div class="desglose">
+            <div class="linea">
+              <span>{{ pricingService.formatearPrecio(config.tarifaBasePorNoche) }} &times; {{ calculation.noches }} {{ calculation.noches === 1 ? 'noche' : 'noches' }}</span>
+              <span>{{ pricingService.formatearPrecio(config.tarifaBasePorNoche * calculation.noches) }}</span>
             </div>
-            <div class="step">
-              <span class="step-number">2</span>
-              <p>Nuestro equipo te responderá con los <strong>datos de pago del anticipo (50%)</strong></p>
+            <div class="linea" *ngIf="calculation.extras > 0">
+              <span>{{ calculation.extras }} {{ calculation.extras === 1 ? 'adicional' : 'adicionales' }} &times; {{ calculation.noches }} {{ calculation.noches === 1 ? 'noche' : 'noches' }}</span>
+              <span>{{ pricingService.formatearPrecio(config.adicionalPorPersonaPorNoche * calculation.extras * calculation.noches) }}</span>
             </div>
-            <div class="step">
-              <span class="step-number">3</span>
-              <p>Envía el <strong>comprobante de pago</strong> para confirmar tu reserva</p>
+            <div class="linea" *ngIf="calculation.huespedes < config.aforoBase">
+              <em>Se aplica la tarifa base ({{ config.aforoBase }} personas).</em>
             </div>
-            <div class="step">
-              <span class="step-number">4</span>
-              <p>El <strong>saldo restante</strong> se paga al momento del check-in</p>
+            <div class="linea linea--total">
+              <span class="total-l">TOTAL</span>
+              <span class="total-n">{{ pricingService.formatearPrecio(calculation.total) }}</span>
             </div>
           </div>
-        </div>
-      </section>
-    </form>
+
+          <div class="pagos-split">
+            <div class="linea">
+              <span>Anticipo al confirmar (50&nbsp;%)</span>
+              <span>{{ pricingService.formatearPrecio(calculation.total * 0.5) }}</span>
+            </div>
+            <div class="linea">
+              <span>Saldo al check-in</span>
+              <span>{{ pricingService.formatearPrecio(calculation.total * 0.5) }}</span>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-template #sinCalculo>
+          <p class="resumen-vacio" *ngIf="!calculation">
+            Elige fechas y número de huéspedes para ver el total.
+          </p>
+          <ul class="resumen-errores" *ngIf="calculation && !calculation.valido">
+            <li *ngFor="let e of calculation.errores">{{ e }}</li>
+          </ul>
+        </ng-template>
+      </div>
+
+      <div class="pasos">
+        <div class="eyebrow">Cómo funciona</div>
+        <ol>
+          <li>Envías la solicitud y se abre WhatsApp con todos los datos.</li>
+          <li>Confirmamos disponibilidad y te pasamos los datos para el anticipo (50&nbsp;%).</li>
+          <li>Nos envías el comprobante y la reserva queda en firme.</li>
+          <li>El saldo se paga al momento del check-in.</li>
+        </ol>
+      </div>
+    </aside>
   </div>
-</div>
+</section>

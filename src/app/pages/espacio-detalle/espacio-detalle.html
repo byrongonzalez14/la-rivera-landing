@@ -1,44 +1,59 @@
-<div class="espacio-detalle" *ngIf="espacio">
-  <div class="container">
-    <div class="content-section">
-      <h1>{{ espacio.nombre }}</h1>
-      
-      <div class="hero-image-container">
-        <img [src]="espacio.imagen" [alt]="espacio.nombre" class="hero-image">
+<ng-container *ngIf="espacio; else noEncontrado">
+  <section class="page-head">
+    <div class="shell page-head-inner">
+      <a class="back-link" routerLink="/espacios">&larr; Todos los espacios</a>
+      <div class="detalle-title">
+        <span class="espacio-n">{{ numero | number: '2.0-0' }}</span>
+        <h1 class="display h-lg">{{ espacio.nombre }}</h1>
       </div>
-      
-      <div class="description">
-        <h2>Descripción</h2>
-        <p>{{ espacio.descripcionLarga }}</p>
+      <p class="lede">{{ espacio.descripcionCorta }}</p>
+    </div>
+  </section>
+
+  <section class="section section--flush-top">
+    <div class="shell detalle-wrap">
+      <div class="frame detalle-img" [class.frame--empty]="!espacio.imagen">
+        <img *ngIf="espacio.imagen" [src]="espacio.imagen" [alt]="espacio.nombre">
+        <span *ngIf="!espacio.imagen">Foto del {{ espacio.nombre }}</span>
       </div>
-      
-      <div class="amenidades">
-        <h3>Amenidades</h3>
-        <ul>
-          <li *ngFor="let amenidad of espacio.amenidades">{{ amenidad }}</li>
-        </ul>
+
+      <p class="display detalle-lead">{{ espacio.descripcionLarga }}</p>
+
+      <div class="detalle-cols">
+        <div class="bloque">
+          <div class="eyebrow">Qué incluye</div>
+          <ul>
+            <li *ngFor="let a of espacio.amenidades">{{ a }}</li>
+          </ul>
+        </div>
+        <div class="bloque">
+          <div class="eyebrow">Cómo se usa</div>
+          <ul>
+            <li *ngFor="let r of espacio.reglas">{{ r }}</li>
+          </ul>
+        </div>
       </div>
-      
-      <div class="reglas">
-        <h3>Reglas del Espacio</h3>
-        <ul>
-          <li *ngFor="let regla of espacio.reglas">{{ regla }}</li>
-        </ul>
-      </div>
-      
-      <div class="cta-section">
-        <a routerLink="/reservar" [queryParams]="{espacio: espacio.slug}" class="btn-primary">
-          Reservar
-        </a>
+
+      <div class="detalle-cta rule-top">
+        <p class="display">¿Te quedas con nosotros?</p>
+        <div class="detalle-cta-btns">
+          <a class="pill pill--solid" routerLink="/reservar" [queryParams]="{ espacio: espacio.slug }">
+            Reservar
+          </a>
+          <a class="pill pill--ghost" routerLink="/espacios">Ver otros espacios</a>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
+</ng-container>
 
-<div *ngIf="!espacio" class="not-found">
-  <div class="container">
-    <h1>Espacio no encontrado</h1>
-    <p>El espacio que buscas no existe.</p>
-    <a routerLink="/espacios" class="btn-primary">Ver todos los espacios</a>
-  </div>
-</div>
+<ng-template #noEncontrado>
+  <section class="page-head">
+    <div class="shell page-head-inner">
+      <div class="eyebrow">Sin resultados</div>
+      <h1 class="display h-lg">Ese espacio <em>no existe</em></h1>
+      <p class="lede">El enlace que seguiste no corresponde a ninguno de nuestros espacios.</p>
+      <a class="pill pill--solid no-encontrado-cta" routerLink="/espacios">Ver todos los espacios</a>
+    </div>
+  </section>
+</ng-template>
