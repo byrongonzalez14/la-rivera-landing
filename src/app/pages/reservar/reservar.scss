@@ -236,3 +236,17 @@ select.control {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 760px) {
+  /* La casilla y su enlace son el último paso antes de enviar: deben
+     poder tocarse sin apuntar. */
+  .check input {
+    width: 24px;
+    height: 24px;
+  }
+
+  .check a {
+    display: inline-block;
+    padding: 6px 0;
+  }
+}

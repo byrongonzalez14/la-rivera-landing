@@ -59,3 +59,10 @@
   color: var(--ink);
   font-weight: 500;
 }
+
+@media (max-width: 760px) {
+  .legal li a {
+    display: inline-block;
+    padding: 8px 0;
+  }
+}

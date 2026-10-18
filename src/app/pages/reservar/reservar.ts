@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PricingService, PricingCalculation } from '../../services/pricing';
+import { SeoService } from '../../services/seo.service';
 import { APP_CONFIG } from '../../config/app.config';
 
 @Component({
@@ -37,6 +38,7 @@ export class ReservarComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
+    private seo: SeoService,
     public pricingService: PricingService
   ) {
     this.reservaForm = this.fb.group({
@@ -54,6 +56,13 @@ export class ReservarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.seo.updateSEO({
+      title: 'Reservar — La Rivera',
+      description:
+        'Elige tus fechas, mira el valor de tu estadía al instante y envíanos la solicitud por WhatsApp.',
+      url: 'https://larivera.com/reservar'
+    });
+
     // Obtener datos de query params si existen
     this.route.queryParams.subscribe(params => {
       const formUpdates: any = {};

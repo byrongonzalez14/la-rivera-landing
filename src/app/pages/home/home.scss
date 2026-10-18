@@ -595,3 +595,9 @@
     font-size: 32px;
   }
 }
+
+@media (max-width: 760px) {
+  .cotizador-form {
+    padding: 10px 0;
+  }
+}

@@ -146,3 +146,10 @@
     text-align: left;
   }
 }
+
+@media (max-width: 760px) {
+  .dato dd a {
+    display: inline-block;
+    padding: 8px 0;
+  }
+}

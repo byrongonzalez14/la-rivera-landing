@@ -519,6 +519,23 @@ textarea.control {
   border: 0;
 }
 
+/* --------------------------------------------------------------------------
+   Táctil: en pantallas sin puntero fino los enlaces de texto quedan muy
+   pequeños para el dedo. Solo en móvil, para no alterar el escritorio.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 760px) {
+  .link-underline,
+  .back-link {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .back-link {
+    display: inline-block;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
